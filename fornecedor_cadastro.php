@@ -9,37 +9,32 @@
 </head>
 <body>
     <div class="bg-primary text-white p-3 text-center">
-        <h1>Cadastro Administradores</h1>
+        <h1>Cadastro Fornecedores</h1>
     </div>
 
 <div class="container">
     <div class="row">
         <div class="col-sm-8 mx-auto mt-3 border border-primary ">
 
-            <h3 class="text-center p-3">Confirmação do Cadastro</h3>
+            <h3 class="text-center p-3">Confirmação de fornecedor</h3>
 
         <div> 
             <?php
                 include "conexao.php";
                 $nome = $_REQUEST["nome"];
-                $login = $_REQUEST["login"];
-                $senha = md5 ($_REQUEST["senha"]);
 
-                echo "Nome do Admnistrador: $nome <br>
-                      Login: $login <br>
-                      Senha: $senha <br>";
 
-                $sql = "insert into administrador(nome, login, senha)
-                        values (:nome, :login, :senha)";
+                echo "Nome do fornecedor: $nome <br>";
 
-                
+                $sql = "insert into fornecedor(nome)
+                        values (:nome)";
+
+            
                 $result = $conexao->prepare("$sql");
-                $result-> bindValue(":nome", $nome);
-                $result-> bindValue(":login", $login);
-                $result-> bindValue(":senha", $senha);
-                $result->execute();
-
-                echo "<p> O Administrador foi cadastrado com sucesso ! "
+                $result ->bindValue("nome", $nome);
+                $result ->execute();
+                 
+                echo "<p> O fornecedor foi cadastrado com sucesso ! </p>";
 
             ?>
         </div>

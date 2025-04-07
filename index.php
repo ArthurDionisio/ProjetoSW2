@@ -11,11 +11,24 @@
 
 </head>
 <body>
-    
+      
+<div class="col-sm-4"> 
+                <h1 class="bg-success">Pagamento</h1>
+                <p class="text-success">
+                    Utilize esta opção para me dar dinheiros
+                    dos produtos que serão vendidos on-line.
+                </p>
+
+                <p>
+                   <a href="formas_pagamento.php" class="btn btn-success">Clique Aqui</a>
+                </p>
+
+            </div>
+
     <div class="container-fluid bg-dark text-white text-center p-5">
         <h1>Projeto SW2</h1>
         <p>
-            Elaborado por Arthur Fellipe Chagas Dionisio
+            Elaborado por Ana Júlia
         </p>
     </div>
 

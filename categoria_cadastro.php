@@ -8,31 +8,36 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </head>
 <body>
-    <div class="bg-success text-white p-3 text-center">
-        <h1>Fornecedor</h1>
+    <div class="bg-primary text-white p-3 text-center">
+        <h1>Cadastro Categorias</h1>
     </div>
 
 <div class="container">
     <div class="row">
         <div class="col-sm-8 mx-auto mt-3 border border-primary ">
 
-            <h3 class="text-center p-3">Preencha os dados abaixo</h3>
+            <h3 class="text-center p-3">Confirmação da Categorias</h3>
 
-            <form action="fornecedor_cadastro.php">
+        <div> 
+            <?php
+                include "conexao.php";
+                $nome = $_REQUEST["nome"];
 
-                <p>
-                    Digite o nome do Fornecedor<br>
-                    <input type="text" name="nome" class="form-control">
-                </p>
+                echo "Nome da Categoria: $nome <br>";
 
-                <p>
-                
-                    <input type="submit" value="cadastrar fornecedor" class="btn btn-primary">
-                    <input type="reset" value="limpar texto" class="btn btn-success">
-                    <a href="index.php" class="btn btn-secondary">Voltar</a>
-                </p>
+                $sql = "insert into categoria(nome)
+                        values (:nome)";
 
-            </form>
+            
+                $result = $conexao->prepare("$sql");
+                $result ->bindValue("nome", $nome);
+                $result ->execute();
+                 
+                echo "<p> A categoria foi cadastrada com sucesso ! </p>";
+
+            ?>
+        </div>
+
             </div>
         </div>
     </div>
