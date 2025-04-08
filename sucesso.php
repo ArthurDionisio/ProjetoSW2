@@ -35,10 +35,6 @@
             padding: 30px;
             border-radius: 5px;
         }
-        .footer {
-            text-align: center;
-            margin-top: 40px;
-        }
     </style>
 </head>
 <body>
@@ -53,27 +49,62 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8 mx-auto">
-                <div class="alert alert-success mt-4" role="alert">
-                    <h4 class="alert-heading">Detalhes do Pagamento</h4>
-                    <ul>
-                        <li><strong>Nome do Titular:</strong> <?php echo htmlspecialchars($_GET['nome']); ?></li>
-                        <li><strong>Número do Cartão:</strong> <?php echo htmlspecialchars($_GET['numero_cartao']); ?></li>
-                        <li><strong>Validade:</strong> <?php echo htmlspecialchars($_GET['validade']); ?></li>
-                        <li><strong>Código de Segurança (CVV):</strong> <?php echo htmlspecialchars($_GET['cvv']); ?></li>
-                    </ul>
-                </div>
+                <?php
+                // Conexão com o banco de dados
+                $servidor = "localhost";      // Endereço do servidor MySQL
+                $bancodados = "projetosw";    // Nome do banco de dados
+                $usuario = "root";            // Nome de usuário do MySQL
+                $senha = "";                  // Senha do MySQL (em branco no caso padrão)
+
+                try {
+                    // Criação da conexão PDO com o banco de dados
+                    $datasource = "mysql:host=$servidor;dbname=$bancodados;charset=UTF8";
+                    $conexao = new PDO($datasource, $usuario, $senha);
+
+                    // Definir modo de erro para exceções
+                    $conexao->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+                    // Buscar o ID do pagamento da URL
+                    if (isset($_GET['id_pagamento'])) {
+                        $id_pagamento = $_GET['id_pagamento'];
+
+                        // Buscar dados do pagamento no banco de dados
+                        $stmt = $conexao->prepare("SELECT * FROM pagamentos WHERE id = ?");
+                        $stmt->execute([$id_pagamento]);
+
+                        // Verificar se o pagamento foi encontrado
+                        if ($stmt->rowCount() > 0) {
+                            $pagamento = $stmt->fetch(PDO::FETCH_ASSOC);
+                            ?>
+                            <div class="alert alert-success mt-4" role="alert">
+                                <h4 class="alert-heading">Detalhes do Pagamento</h4>
+                                <ul>
+                                    <li><strong>Nome do Titular:</strong> <?php echo htmlspecialchars($pagamento['nome']); ?></li>
+                                    <li><strong>Número do Cartão:</strong> <?php echo htmlspecialchars($pagamento['numero_cartao']); ?></li>
+                                    <li><strong>Validade:</strong> <?php echo htmlspecialchars($pagamento['validade']); ?></li>
+                                    <li><strong>Código de Segurança (CVV):</strong> <?php echo htmlspecialchars($pagamento['cvv']); ?></li>
+                                </ul>
+                            </div>
+                            <?php
+                        } else {
+                            echo "<p class='text-danger'>Pagamento não encontrado.</p>";
+                        }
+                    } else {
+                        echo "<p class='text-danger'>ID do pagamento não fornecido.</p>";
+                    }
+
+                } catch (PDOException $e) {
+                    // Caso ocorra algum erro na conexão
+                    echo "Erro na conexão: " . $e->getMessage();
+                }
+                ?>
 
                 <!-- Botão para voltar -->
-                <div class="text-center">
+                <div class="text-center mt-4">
                     <a href="index.php" class="btn btn-success">Voltar à Página Inicial</a>
                 </div>
             </div>
         </div>
-    </div>
-
-    <!-- Rodapé -->
-    <div class="footer mt-5">
-        <p>&copy; 2025 Sua Empresa. Todos os direitos reservados.</p>
     </div>
 
 </body>

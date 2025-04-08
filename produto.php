@@ -43,6 +43,7 @@
                 <p>
                 
                     <input type="submit" value="cadastrar produto" class="btn btn-primary">
+                    <a href="produto_cadastrado.php" class="btn btn-secondary">cadastrar</a>
                     <input type="reset" value="limpar texto" class="btn btn-success">
                     <a href="index.php" class="btn btn-secondary">Voltar</a>
                 </p>
