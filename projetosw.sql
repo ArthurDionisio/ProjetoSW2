@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Tempo de geração: 25-Mar-2025 às 13:49
+-- Tempo de geração: 08-Abr-2025 às 11:01
 -- Versão do servidor: 8.0.31
 -- versão do PHP: 8.0.26
 
@@ -20,8 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Banco de dados: `projetosw`
 --
-CREATE DATABASE IF NOT EXISTS `projetosw` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
-USE `projetosw`;
 
 -- --------------------------------------------------------
 
@@ -54,6 +52,22 @@ CREATE TABLE IF NOT EXISTS `categoria` (
 -- --------------------------------------------------------
 
 --
+-- Estrutura da tabela `formas_pagamento`
+--
+
+DROP TABLE IF EXISTS `formas_pagamento`;
+CREATE TABLE IF NOT EXISTS `formas_pagamento` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `nome` varchar(155) NOT NULL,
+  `numero_cartao` varchar(100) NOT NULL,
+  `validade` varchar(100) NOT NULL,
+  `cvv` varchar(3) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura da tabela `fornecedor`
 --
 
@@ -61,6 +75,26 @@ DROP TABLE IF EXISTS `fornecedor`;
 CREATE TABLE IF NOT EXISTS `fornecedor` (
   `codigo` int NOT NULL AUTO_INCREMENT,
   `nome` varchar(100) NOT NULL,
+  PRIMARY KEY (`codigo`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `produto`
+--
+
+DROP TABLE IF EXISTS `produto`;
+CREATE TABLE IF NOT EXISTS `produto` (
+  `codigo` int NOT NULL AUTO_INCREMENT,
+  `descricao` varchar(200) NOT NULL,
+  `precusto` float(10,2) NOT NULL,
+  `precovenda` float(10,2) NOT NULL,
+  `codcategoria` int NOT NULL,
+  `codfornecedor` int NOT NULL,
+  `imagem1` varchar(200) NOT NULL,
+  `imagem2` varchar(200) NOT NULL,
+  `imagem3` varchar(200) NOT NULL,
   PRIMARY KEY (`codigo`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 COMMIT;
