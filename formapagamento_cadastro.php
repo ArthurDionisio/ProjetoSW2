@@ -25,10 +25,10 @@
                     
                     $nome= $_REQUEST["nome"];
                 
-            echo "Nome da Categoria: $nome <br>";
+            echo "Forma de Pagamento: $nome <br>";
          
 
-            $sql="insert into categoria(nome)
+            $sql="insert into formapagamento(nome)
             values(:nome)";
 
             
@@ -36,7 +36,7 @@
             $result->bindValue(":nome", $nome);
             $result->execute();
 
-            echo "<p> A Categoria foi cadastrado com sucesso!</P>";
+            echo "<p> A Forma de Pagamento foi cadastrado  com sucesso!</p>";
 
          ?>
           <a href="index.php" class="btn btn-primary">Voltar</a>

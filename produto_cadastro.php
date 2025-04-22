@@ -23,20 +23,31 @@
                     <?php 
                     include "conexao.php";
                     
-                    $nome= $_REQUEST["nome"];
-                
-            echo "Nome da Categoria: $nome <br>";
-         
+                    $descricao= $_REQUEST["descricao"];
+                    $precocusto= $_REQUEST["precocusto"];
+                    $precovenda= $_REQUEST["precovenda"];
+                    $codcategoria= $_REQUEST["codcategoria"];
+                    $codfornecedor= $_REQUEST["codfornecedor"];
+                    
+            echo "Nome do Produto: $descricao <br>
+            Preço de Custo: $precocusto <br>
+            Preço de Venda: $precovenda <br>
+            Categoria: $codcategoria <br>
+            Fornecedor: $codfornecedor <br>";
 
-            $sql="insert into categoria(nome)
-            values(:nome)";
+            $sql="insert into produto(descricao, precocusto, precovenda,codcategoria, codfornecedor )
+            values(:descricao, :precocusto, :precovenda, :codcategoria, :codfornecedor)";
 
             
             $result= $conexao->prepare($sql);
-            $result->bindValue(":nome", $nome);
+            $result->bindValue(":descricao", $descricao);
+            $result->bindValue(":precocusto", $precocusto);
+            $result->bindValue(":precovenda", $precovenda);
+            $result->bindValue(":codcategoria", $codcategoria);
+            $result->bindValue(":codfornecedor", $codfornecedor);
             $result->execute();
 
-            echo "<p> A Categoria foi cadastrado com sucesso!</P>";
+            echo "<p> O Produto foi cadastrado com sucesso!</p>";
 
          ?>
           <a href="index.php" class="btn btn-primary">Voltar</a>
