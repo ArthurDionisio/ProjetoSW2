@@ -19,7 +19,7 @@
         session_start();
         $_SESSION["nome"] = $linha["nome"]; 
 
-        header("localtion: index.php")
+        header("location: index.php");
     }
     else
     {
